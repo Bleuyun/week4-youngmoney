@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>young money</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&display=swap" rel="stylesheet">
+	<style type="text/css">
+		
+		html{font-family: 'Oleo Script', cursive;}
+		body{
+			background-image: url(rich.jpg);
+			background-repeat: no-repeat;
+			height: 100vh;
+     		background-size : cover;
+			}
+        .header{
+        	margin-left: 80px;
+        	margin-top: 200px; 
+        	margin-bottom: 100px;
+        }
+
+       .box{
+       		width: 150px; 
+       		height: 150px; 
+       		position: absolute;
+       		content: url(money.png);
+       	}
+
+       #tm{ 
+       		position: absolute; 
+       		left: 50%; 
+       		transform: translateX(-50%);
+       		font-size: 4em; 
+       		display: flex; 
+       		color: white;
+       		-webkit-user-select: none;
+       	}
+
+	  #music{
+            position: absolute;
+            left: 45%; 
+            padding-top: 400px;
+            cursor: pointer;
+        }
+
+        #_score{
+            font-size: 100px;
+            position:absolute;
+        }
+
+	</style>
+</head>
+<body>
+	<div id="header">
+		<div id="music">
+            <img id="playBut" src="music.png" width="150px">
+            <audio id="swallaSnd" src="swalla.m4A" width="80px"></audio>
+        </div>
+
+
+		<div id="title" style="font-size: 100px; color: white; text-align: center;">YOUNG MONEY</div>
+		<div id="tm">$$$$</div>
+	</div>  
+
+
+
+		<script type="text/javascript">
+
+		var state = false;
+
+        var score = 0;
+
+        var playBut = document.getElementById('playBut');
+
+        var imgDiv = document.getElementById('money');
+        var img = document.getElementById('money_img')
+
+        setTimeout(result,62000);
+
+			playBut.onclick=function(){
+            if (state) {
+                playBut.src = "music.png";
+                swallaSnd.pause();
+                state = false;
+            }
+            else {
+                playBut.src = "music.png";
+                swallaSnd.play();
+                state = true;
+            }
+        }
+
+		 function result(){
+            alert("당신이 get한 액수는 " + score + "00만원 입니다");
+            clearInterval(game);
+            clearInterval(timeD);
+        }
+
+		makeBox();
+		function makeBox(){
+			var a = document.createElement("div");
+			a.id = "money";
+			a.className = "box";
+			var b = Math.random()*window.innerWidth;
+			var c = Math.random()*window.innerHeight;
+			a.style.left = b + "px";
+			a.style.top = c + "px";
+			a.onclick = function(){
+				a.parentNode.removeChild(a);
+				makeBox();
+			}
+			document.body.appendChild(a);
+		}
+
+		 
+        var time = 60;
+        var min = "1"
+        var sec = "60"
+
+        var x = setInterval(function () {
+            min = parseInt(time / 60);
+            sec = time % 60;
+
+            document.getElementById("tm").innerHTML = min + ":" + sec; time--;
+
+            if (time < 0) {
+                clearInterval(x);
+                document.getElementById("tm").innerHTML = "$$$$";
+            }
+
+        }, 1000);
+	
+	</script>
+
+</body>
+</html>
